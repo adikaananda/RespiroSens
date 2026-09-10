@@ -1,4 +1,4 @@
-# ⚠️ DEMO / SIMULATION DATA ONLY
+# DEMO / SIMULATION DATA ONLY
 
 Everything under `data/demo/` (and any screening sessions seeded with
 `init_db.py --with-demo-sessions`) is **synthetically generated** by
