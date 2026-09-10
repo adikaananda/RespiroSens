@@ -1,2 +1,11 @@
+[project]
+name = "respirosens"
+version = "0.1.0"
+description = "RespiroSens Flask Backend"
+requires-python = ">=3.12"
+dependencies = [
+    "flask",
+]
+
 [tool.vercel]
 entrypoint = "run:app"
