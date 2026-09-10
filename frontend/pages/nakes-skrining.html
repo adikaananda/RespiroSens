@@ -1,0 +1,153 @@
+        <div class="page-head" style="margin-bottom:8px;">
+          <div><h1>Skrining Gejala Awal</h1><p>Lengkapi formulir untuk menghitung skor risiko pernapasan pasien.</p></div>
+        </div>
+
+        <div class="card">
+          <div class="screen-progress" id="screenProgress"></div>
+        </div>
+
+        <div class="card" id="stepPanel1">
+          <div class="card-header"><h2>1. Data Diri Pasien</h2></div>
+
+          <div class="field" style="margin-bottom:14px;">
+            <label>Pindai KTP (opsional)</label>
+            <div class="ktp-mode-tabs">
+              <button type="button" class="ktp-mode-tab active" id="ktpModeCameraTab" onclick="setKtpMode('camera')">Ambil Foto</button>
+              <button type="button" class="ktp-mode-tab" id="ktpModeFileTab" onclick="setKtpMode('file')">Unggah File</button>
+            </div>
+
+            <div id="ktpCameraPanel" class="ktp-panel">
+              <div class="ktp-camera-frame">
+                <video id="ktpCameraVideo" autoplay playsinline muted></video>
+                <canvas id="ktpCameraCanvas" class="hidden"></canvas>
+                <img id="ktpCapturedPreview" class="hidden" alt="Foto KTP tertangkap">
+                <div class="ktp-camera-overlay" id="ktpCameraOverlay">
+                  <svg viewBox="0 0 200 130" width="86%"><rect x="4" y="4" width="192" height="122" rx="12" fill="none" stroke="#fff" stroke-width="2.5" stroke-dasharray="10 8" opacity="0.85"/></svg>
+                  <span>Posisikan KTP dalam bingkai</span>
+                </div>
+              </div>
+              <div class="ktp-camera-actions">
+                <button class="btn-ghost" type="button" id="ktpOpenCameraBtn" onclick="openKtpCamera()">Buka Kamera</button>
+                <button class="btn-primary hidden" type="button" id="ktpCaptureBtn" onclick="captureKtpPhoto()">Ambil Foto</button>
+                <button class="btn-ghost hidden" type="button" id="ktpRetakeBtn" onclick="retakeKtpPhoto()">Ambil Ulang</button>
+                <button class="btn-ghost hidden" type="button" id="ktpCloseCameraBtn" onclick="closeKtpCamera()">Tutup Kamera</button>
+              </div>
+            </div>
+
+            <div id="ktpFilePanel" class="ktp-panel hidden">
+              <input type="file" id="ktpFile" accept="image/*">
+              <button class="btn-ghost" onclick="scanKtpFromFile()" style="margin-top:8px;" type="button">Pindai KTP Otomatis</button>
+            </div>
+
+            <p id="ktpScanStatus" style="margin-top:8px;font-size:12px;color:var(--ink-600);"></p>
+          </div>
+
+          <div class="symptom-grid">
+            <div class="field"><label>Nama Lengkap</label><input type="text" id="pName" placeholder="cth. I Wayan Sudarma"></div>
+            <div class="field"><label>Usia</label><input type="text" id="pAge" placeholder="cth. 34"></div>
+            <div class="field"><label>Jenis Kelamin</label>
+              <select id="pSex"><option value="">— Pilih —</option><option value="L">Laki-laki</option><option value="P">Perempuan</option></select>
+            </div>
+            <div class="field"><label>Pekerjaan</label><input type="text" id="pJob" placeholder="cth. Buruh Bangunan"></div>
+            <div class="field"><label>Tinggi Badan (cm)</label><input type="text" id="pHeight" placeholder="cth. 165"></div>
+            <div class="field"><label>Berat Badan (kg)</label><input type="text" id="pWeight" placeholder="cth. 60"></div>
+            <div class="field"><label>Riwayat Merokok</label>
+              <select id="pSmoking"><option value="never">Tidak Pernah</option><option value="former">Mantan Perokok</option><option value="active">Perokok Aktif</option></select>
+            </div>
+            <div class="field"><label>Nomor WhatsApp (untuk notifikasi hasil)</label><input type="text" id="pWhatsapp" placeholder="cth. 081234567890"></div>
+          </div>
+          <p id="step1Error" style="display:none;color:#e05252;font-size:12px;margin-top:6px;"></p>
+          <button class="btn-primary" onclick="nextStep()" style="margin-top:6px;">Lanjut ke Gejala Klinis</button>
+        </div>
+
+        <div class="card hidden" id="stepPanel2">
+          <div class="card-header"><h2>2. Gejala Klinis</h2></div>
+          <div class="symptom-grid">
+            <div class="symptom-card"><input type="checkbox" id="g1" checked><label for="g1">Batuk terus-menerus &gt; 2 minggu</label></div>
+            <div class="symptom-card"><input type="checkbox" id="g2"><label for="g2">Demam hilang timbul</label></div>
+            <div class="symptom-card"><input type="checkbox" id="g3" checked><label for="g3">Keringat malam berlebih</label></div>
+            <div class="symptom-card"><input type="checkbox" id="g4"><label for="g4">Penurunan berat badan drastis</label></div>
+            <div class="symptom-card"><input type="checkbox" id="g5" checked><label for="g5">Sesak napas / napas pendek</label></div>
+            <div class="symptom-card"><input type="checkbox" id="g6"><label for="g6">Nyeri dada saat bernapas</label></div>
+          </div>
+          <button class="btn-primary" onclick="nextStep()" style="margin-top:18px;">Lanjut ke Pemeriksaan Vital</button>
+        </div>
+
+        <div class="card hidden" id="stepPanel3">
+          <div class="card-header"><h2>3. Vital &amp; Hembusan Napas — RespiroSens</h2>
+            <div class="pill" id="deviceModePill"><span class="device-dot" id="deviceModeDot"></span><span id="deviceModeLabel">Memeriksa perangkat...</span></div>
+          </div>
+
+          <div class="device-capture-box" id="deviceCaptureBox">
+            <div class="device-capture-icon" id="deviceCaptureIcon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><use href="#ic-lung"/></svg>
+            </div>
+            <div class="device-capture-text">
+              <h3 id="deviceCaptureTitle">Siap memulai pembacaan</h3>
+              <p id="deviceCaptureSub">Minta pasien meniup ke corong RespiroSens, lalu tekan mulai. Sensor VOC (BME688, SGP41, SHT40, SCD40, amonia) akan membaca profil napas secara otomatis — tidak perlu input manual.</p>
+            </div>
+            <button class="btn-primary" id="startDeviceReadBtn" onclick="startDeviceCapture()">Mulai Pembacaan Perangkat</button>
+          </div>
+
+          <div class="hidden" id="deviceReadingPanel">
+            <div class="card-header" style="margin-top:18px;margin-bottom:10px;"><h2 style="font-size:14px;">Pembacaan Real-Time dari Perangkat</h2><div class="pill" id="sampleQualityPill">—</div></div>
+            <div class="vital-readout-grid" id="vitalReadoutGrid"></div>
+            <div id="manualVitalsFallback" class="hidden">
+              <p style="font-size:12px;color:var(--amber);margin:14px 0 8px;font-weight:600;">⚠ Sebagian nilai tidak terbaca otomatis dari perangkat — lengkapi manual:</p>
+              <div class="symptom-grid" id="manualVitalsFields"></div>
+            </div>
+            <p style="font-size:11.5px;color:var(--ink-400);margin-top:10px;" id="sampleMetaLine"></p>
+          </div>
+
+          <p id="step3Error" style="display:none;color:#e05252;font-size:12px;margin-top:10px;"></p>
+          <button class="btn-primary hidden" id="computeScoreBtn" onclick="showResult()" style="margin-top:14px;">Hitung Skor Risiko (Analisis AI)</button>
+        </div>
+
+        <div class="card hidden" id="stepPanel4">
+          <div class="result-header">
+            <div>
+              <h2 style="font-family:var(--font-head);font-size:17px;font-weight:800;">Hasil Analisis AI RespiroSens</h2>
+              <p style="font-size:12px;color:var(--ink-600);margin-top:3px;" id="resultTimestamp">—</p>
+            </div>
+            <div class="result-badges">
+              <span class="result-badge" id="resultModelBadge">XGBoost + SHAP</span>
+              <span class="result-badge hitl">Human-in-the-loop</span>
+            </div>
+          </div>
+
+          <div class="result-hero">
+            <div class="risk-ring">
+              <svg><circle cx="75" cy="75" r="64" stroke="#E9EDF5" stroke-width="12" fill="none"/><circle id="riskRingArc" cx="75" cy="75" r="64" stroke="#EA5A6B" stroke-width="12" fill="none" stroke-dasharray="402" stroke-dashoffset="402" stroke-linecap="round"/></svg>
+              <div class="rr-label"><b id="riskScoreNum">–</b><span>Skor Risiko</span></div>
+            </div>
+            <span class="risk-tag high" id="riskCategoryTag" style="font-size:13px;padding:8px 18px;">–</span>
+            <p id="riskRecommendationText" style="max-width:480px;margin:14px auto 0;font-size:13px;color:var(--ink-600);line-height:1.6;"></p>
+          </div>
+
+          <div class="validation-panel" id="validationPanel">
+            <div class="validation-item"><span class="vp-label">Sumber Sampel</span><span class="vp-value" id="valSampleSource">—</span></div>
+            <div class="validation-item"><span class="vp-label">Kualitas Sampel</span><span class="vp-value" id="valQuality">—</span></div>
+            <div class="validation-item"><span class="vp-label">Durasi Embusan</span><span class="vp-value" id="valDuration">—</span></div>
+            <div class="validation-item"><span class="vp-label">Versi Model</span><span class="vp-value" id="valModelVersion">—</span></div>
+          </div>
+
+          <div class="shap-panel">
+            <div class="shap-panel-head">
+              <h3>Dekomposisi Senyawa VOC (SHAP Values)</h3>
+              <p>Kontribusi tiap senyawa terhadap skor — bukan senyawa tunggal, melainkan kombinasi pola multivariat.</p>
+            </div>
+            <div id="shapBars"></div>
+            <div class="shap-legend"><span><i style="background:var(--red)"></i>Menaikkan risiko</span><span><i style="background:var(--blue-600)"></i>Menurunkan risiko</span></div>
+          </div>
+
+          <div class="clinical-note-box" id="clinicalNoteBox">
+            Hasil ini adalah skor <b>skrining/triase AI</b>, <b>bukan diagnosis medis</b>. Skor rendah tidak menyingkirkan diagnosis pada presentasi klinis kuat.
+            Setiap skor wajib ditinjau tenaga kesehatan bersama konteks klinis pasien dan ditindaklanjuti dengan pemeriksaan konfirmasi baku (mis. TCM/Xpert MTB-RIF) sebelum keputusan klinis diambil.
+          </div>
+
+          <div style="display:flex;gap:12px;justify-content:center;margin-top:20px;">
+            <button class="btn-ghost" onclick="goPage('nakes-dashboard')">Kembali ke Dashboard</button>
+            <button class="btn-primary" id="saveReferralBtn" onclick="saveAndReferral()">Simpan &amp; Buat Rujukan</button>
+          </div>
+          <p id="referralStatus" style="font-size:12px;color:var(--ink-600);margin-top:10px;text-align:center;"></p>
+        </div>

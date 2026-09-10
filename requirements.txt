@@ -1,0 +1,32 @@
+Flask==3.0.3
+Flask-SQLAlchemy==3.1.1
+Flask-Cors==4.0.1
+itsdangerous==2.2.0
+Werkzeug==3.0.4
+python-dotenv==1.0.1
+
+# ML pipeline
+numpy==1.26.4
+pandas==2.2.2
+scikit-learn==1.5.1
+xgboost==2.1.1
+shap==0.46.0
+
+# PDF / QR referral letters
+reportlab==4.2.2
+qrcode==7.4.2
+Pillow==10.4.0
+
+# KTP OCR (optional at runtime — see README_INSTALL.md for system packages)
+opencv-python-headless==4.10.0.84
+pytesseract==0.3.13
+
+# WhatsApp Business Cloud API client
+requests==2.32.3
+
+# MySQL / MariaDB driver (for XAMPP or any MySQL-compatible server)
+PyMySQL==1.1.1
+cryptography==43.0.1
+
+# Testing
+pytest==8.3.2

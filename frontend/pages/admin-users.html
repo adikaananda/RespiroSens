@@ -1,0 +1,30 @@
+        <div class="page-head" style="margin-bottom:22px;">
+          <div><h1>Kelola Pengguna</h1><p>Tambah, ubah peran, atau nonaktifkan akun pengguna sistem.</p></div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div class="search-box" style="background:#fff;border:1px solid var(--line);width:220px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#ic-search"/></svg>
+              <input type="text" id="usersSearchInput" placeholder="Cari nama / email" oninput="debouncedSearch('users')" style="border:none;outline:none;background:transparent;font:inherit;width:100%;">
+            </div>
+            <button class="btn-primary" onclick="toggleModal(true)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4"><use href="#ic-plus"/></svg>Tambah Pengguna</button>
+          </div>
+        </div>
+        <div class="card">
+          <table>
+            <thead><tr><th>Nama</th><th>Peran</th><th>Instansi</th><th>Status</th><th>Aksi</th></tr></thead>
+            <tbody id="usersTableBody">
+              <tr><td colspan="5" style="text-align:center;color:var(--ink-600);">Memuat data...</td></tr>
+            </tbody>
+          </table>
+          <div class="row-foot"><div class="total-pill" id="usersTotalPill">Total — 0</div></div>
+        </div><div id="userModalBg" class="hidden" style="position:fixed;inset:0;background:rgba(16,22,39,0.45);display:flex;align-items:center;justify-content:center;z-index:50;">
+  <div class="card" style="width:100%;max-width:420px;">
+    <div class="card-header"><h2>Tambah Pengguna Baru</h2><button class="icon-btn" onclick="toggleModal(false)">✕</button></div>
+    <div class="field"><label>Nama Lengkap</label><input type="text" id="newUserName" placeholder="cth. Ns. Ayu Kartika"></div>
+    <div class="field"><label>Email</label><input type="text" id="newUserEmail" placeholder="nama@instansi.go.id"></div>
+    <div class="field"><label>Peran</label><select id="newUserRole"><option value="nakes">Nakes</option><option value="dinkes">Dinkes</option><option value="admin">Admin</option></select></div>
+    <div class="field"><label>Faskes (khusus Nakes)</label><select id="newUserFacility"><option value="">— Tidak ada —</option></select></div>
+    <div class="field"><label>Kata Sandi Sementara</label><input type="password" id="newUserPassword" placeholder="Buat kata sandi"></div>
+    <p id="newUserError" style="display:none;color:#e05252;font-size:12px;"></p>
+    <button class="btn-primary" style="width:100%;justify-content:center;" onclick="submitNewUser()">Simpan Pengguna</button>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+/* ==========================================================================
+   Design tokens (colors, spacing, shadows, fonts) + base resets.
+   Every other CSS file in this folder relies on these custom properties —
+   keep this file loaded FIRST in index.html.
+   ========================================================================== */
+:root{
+  --blue-900:#0B2E6B;
+  --blue-700:#1651C7;
+  --blue-600:#2A6DF4;
+  --blue-500:#3F7DFF;
+  --blue-100:#E8F0FF;
+  --blue-50:#F3F7FF;
+  --teal:#0EA5A0;
+  --teal-100:#E3F7F5;
+  --amber:#F0A93A;
+  --amber-100:#FDF1DE;
+  --red:#EA5A6B;
+  --red-100:#FDEBEE;
+  --green:#26B978;
+  --green-100:#E6F8EF;
+  --purple:#7A6FF0;
+  --purple-100:#EEECFC;
+  --ink-900:#101627;
+  --ink-600:#5B6478;
+  --ink-400:#96A0B2;
+  --line:#E9EDF5;
+  --bg:#F2F5FB;
+  --card:#FFFFFF;
+  --radius-lg:22px;
+  --radius-md:16px;
+  --radius-sm:10px;
+  --shadow:0 10px 30px -14px rgba(16,40,90,0.16);
+  --shadow-sm:0 4px 14px -8px rgba(16,40,90,0.14);
+  --font-ui:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --font-head:'Plus Jakarta Sans',var(--font-ui);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:var(--font-ui);
+  background:var(--bg);
+  color:var(--ink-900);
+  -webkit-font-smoothing:antialiased;
+}
+.hidden{display:none !important;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;}
+input,select{font-family:inherit;}
+::selection{background:var(--blue-100);}

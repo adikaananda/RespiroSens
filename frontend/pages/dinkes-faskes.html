@@ -1,0 +1,32 @@
+        <div class="page-head" style="margin-bottom:22px;">
+          <div><h1>Data Fasilitas Kesehatan</h1><p>Kelola dan pantau faskes yang terhubung ke RespiroSens.</p></div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div class="search-box" style="background:#fff;border:1px solid var(--line);width:220px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#ic-search"/></svg>
+              <input type="text" id="faskesSearchInput" placeholder="Cari faskes / kecamatan" oninput="debouncedSearch('faskes')" style="border:none;outline:none;background:transparent;font:inherit;width:100%;">
+            </div>
+            <button class="btn-primary" onclick="toggleFacilityModal(true)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4"><use href="#ic-plus"/></svg>Tambah Faskes</button>
+          </div>
+        </div>
+        <div class="card">
+          <table>
+            <thead><tr><th>Nama Faskes</th><th>Kecamatan</th><th>Total Skrining</th><th>Kuning</th><th>Merah</th><th>Status</th></tr></thead>
+            <tbody id="faskesTableBody">
+              <tr><td colspan="6" style="text-align:center;color:var(--ink-600);">Memuat data...</td></tr>
+            </tbody>
+          </table>
+        </div><div id="facilityModalBg" class="hidden" style="position:fixed;inset:0;background:rgba(16,22,39,0.45);display:flex;align-items:center;justify-content:center;z-index:50;">
+  <div class="card" style="width:100%;max-width:420px;">
+    <div class="card-header"><h2>Tambah Faskes Baru</h2><button class="icon-btn" onclick="toggleFacilityModal(false)">✕</button></div>
+    <div class="field"><label>Nama Faskes</label><input type="text" id="newFacilityName" placeholder="cth. Puskesmas Denpasar Timur I"></div>
+    <div class="field"><label>Kabupaten/Kota</label><input type="text" id="newFacilityDistrict" placeholder="cth. Denpasar"></div>
+    <div class="field"><label>Kecamatan</label><input type="text" id="newFacilitySubdistrict" placeholder="cth. Denpasar Timur"></div>
+    <div class="symptom-grid">
+      <div class="field"><label>Latitude</label><input type="text" id="newFacilityLat" placeholder="cth. -8.65"></div>
+      <div class="field"><label>Longitude</label><input type="text" id="newFacilityLng" placeholder="cth. 115.22"></div>
+    </div>
+    <p style="font-size:11px;color:var(--ink-600);margin-top:-4px;">Latitude/longitude opsional — isi supaya faskes muncul di Peta Sebaran Risiko. Cari koordinat lewat Google Maps (klik kanan lokasi → salin koordinat).</p>
+    <p id="newFacilityError" style="display:none;color:#e05252;font-size:12px;"></p>
+    <button class="btn-primary" style="width:100%;justify-content:center;margin-top:6px;" onclick="submitNewFacility()">Simpan Faskes</button>
+  </div>
+</div>

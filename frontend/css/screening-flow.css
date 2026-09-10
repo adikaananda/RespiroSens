@@ -1,0 +1,114 @@
+/* ===================== Screening flow page ===================== */
+.screen-progress{ display:flex; align-items:center; gap:0; margin-bottom:6px; }
+.sp-step{ display:flex; align-items:center; gap:10px; flex:1; }
+.sp-circle{ width:34px; height:34px; border-radius:50%; background:var(--line); color:var(--ink-400); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px; flex-shrink:0; }
+.sp-circle.on{ background:var(--blue-600); color:#fff; }
+.sp-circle.done{ background:var(--green); color:#fff; }
+.sp-label{ font-size:12.5px; font-weight:700; color:var(--ink-400); white-space:nowrap; }
+.sp-label.on{ color:var(--ink-900); }
+.sp-line{ flex:1; height:2px; background:var(--line); margin:0 6px; }
+
+.symptom-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.symptom-card{
+  border:1.5px solid var(--line); border-radius:14px; padding:14px 16px; display:flex; align-items:center; gap:12px;
+  transition:all .15s;
+}
+.symptom-card input{ width:18px; height:18px; accent-color:var(--blue-600); flex-shrink:0; }
+.symptom-card label{ font-size:13.5px; font-weight:600; cursor:pointer; }
+.symptom-card:has(input:checked){ border-color:var(--blue-600); background:var(--blue-50); }
+
+.result-hero{ text-align:center; padding:26px 0; }
+.risk-ring{ width:150px; height:150px; margin:0 auto 18px; position:relative; }
+.risk-ring svg{ transform:rotate(-90deg); width:150px; height:150px; }
+.risk-ring .rr-label{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+.risk-ring .rr-label b{ font-family:var(--font-head); font-size:30px; font-weight:800; }
+.risk-ring .rr-label span{ font-size:11.5px; color:var(--ink-600); font-weight:600; }
+
+@media (max-width:1240px){
+  .symptom-grid{ grid-template-columns:1fr; }
+}
+
+/* ===================== KTP camera capture ===================== */
+.ktp-mode-tabs{ display:flex; gap:8px; margin-bottom:10px; }
+.ktp-mode-tab{
+  padding:8px 16px; border-radius:10px; border:1.5px solid var(--line); background:#fff;
+  font-size:12.5px; font-weight:600; color:var(--ink-600);
+}
+.ktp-mode-tab.active{ border-color:var(--blue-600); background:var(--blue-50); color:var(--blue-700); }
+.ktp-panel{ margin-top:4px; }
+.ktp-camera-frame{
+  position:relative; width:100%; max-width:420px; aspect-ratio:16/10; border-radius:16px; overflow:hidden;
+  background:#101627; display:flex; align-items:center; justify-content:center;
+}
+.ktp-camera-frame video, .ktp-camera-frame img{ width:100%; height:100%; object-fit:cover; }
+.ktp-camera-overlay{
+  position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
+  pointer-events:none;
+}
+.ktp-camera-overlay span{ color:#fff; font-size:12px; font-weight:600; background:rgba(0,0,0,0.35); padding:5px 12px; border-radius:20px; }
+.ktp-camera-actions{ display:flex; gap:10px; margin-top:12px; flex-wrap:wrap; }
+
+/* ===================== Device capture (Step 3) ===================== */
+.device-dot{ width:8px; height:8px; border-radius:50%; display:inline-block; background:var(--ink-400); }
+.device-dot.live{ background:var(--green); box-shadow:0 0 0 3px var(--green-100); }
+.device-dot.sim{ background:var(--amber); box-shadow:0 0 0 3px var(--amber-100); }
+.device-capture-box{
+  border:1.5px dashed var(--line); border-radius:18px; padding:28px 24px; text-align:center;
+  display:flex; flex-direction:column; align-items:center; gap:10px;
+}
+.device-capture-icon{
+  width:56px; height:56px; border-radius:50%; background:var(--blue-100); color:var(--blue-600);
+  display:flex; align-items:center; justify-content:center;
+}
+.device-capture-icon svg{ width:26px; height:26px; }
+.device-capture-icon.reading{ background:var(--amber-100); color:var(--amber); animation:pulse-ring 1.4s ease-in-out infinite; }
+.device-capture-icon.done{ background:var(--green-100); color:var(--green); }
+.device-capture-icon.error{ background:var(--red-100); color:var(--red); }
+@keyframes pulse-ring{ 0%,100%{ box-shadow:0 0 0 0 rgba(240,169,58,0.35);} 50%{ box-shadow:0 0 0 10px rgba(240,169,58,0);} }
+.device-capture-text h3{ font-size:14.5px; font-weight:700; }
+.device-capture-text p{ font-size:12.5px; color:var(--ink-600); max-width:440px; margin-top:4px; line-height:1.55; }
+
+.vital-readout-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+.vital-readout-item{ border:1px solid var(--line); border-radius:14px; padding:12px 14px; }
+.vital-readout-item .vr-label{ font-size:10.5px; color:var(--ink-400); font-weight:700; letter-spacing:.3px; }
+.vital-readout-item .vr-value{ font-size:18px; font-weight:800; font-family:var(--font-head); margin-top:4px; }
+.vital-readout-item .vr-value span{ font-size:12px; font-weight:500; color:var(--ink-600); font-family:var(--font-ui); }
+.vital-readout-item .vr-source{ font-size:10.5px; margin-top:4px; font-weight:600; }
+.vital-readout-item .vr-source.device{ color:var(--green); }
+.vital-readout-item .vr-source.manual{ color:var(--amber); }
+
+/* ===================== Result screen (Step 4) — professional validation UI ===================== */
+.result-header{ display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-bottom:8px; }
+.result-badges{ display:flex; gap:8px; }
+.result-badge{ font-size:11px; font-weight:700; padding:5px 11px; border-radius:20px; background:var(--blue-100); color:var(--blue-700); }
+.result-badge.hitl{ background:var(--teal-100); color:var(--teal); }
+
+.validation-panel{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:22px 0;
+  border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:16px 0;
+}
+.validation-item{ display:flex; flex-direction:column; gap:4px; text-align:center; }
+.vp-label{ font-size:10.5px; color:var(--ink-400); font-weight:700; letter-spacing:.3px; }
+.vp-value{ font-size:13px; font-weight:700; }
+
+.shap-panel{ margin-top:8px; }
+.shap-panel-head h3{ font-size:14px; font-weight:700; }
+.shap-panel-head p{ font-size:11.5px; color:var(--ink-600); margin-top:2px; margin-bottom:14px; }
+.shap-bar-row{ display:grid; grid-template-columns:150px 1fr 60px; align-items:center; gap:10px; margin-bottom:9px; }
+.shap-bar-row .sb-label{ font-size:12px; font-weight:600; color:var(--ink-900); text-align:right; }
+.shap-bar-track{ height:16px; background:var(--bg); border-radius:8px; position:relative; overflow:hidden; }
+.shap-bar-fill{ height:100%; border-radius:8px; }
+.shap-bar-row .sb-value{ font-size:11.5px; font-weight:700; color:var(--ink-600); }
+.shap-legend{ display:flex; gap:18px; margin-top:10px; }
+.shap-legend span{ font-size:11px; color:var(--ink-600); display:flex; align-items:center; gap:6px; }
+.shap-legend i{ width:10px; height:10px; border-radius:3px; display:inline-block; }
+
+.clinical-note-box{
+  margin-top:20px; background:var(--blue-50); border:1px solid var(--blue-100); border-radius:14px;
+  padding:14px 16px; font-size:12.5px; color:var(--ink-600); line-height:1.6; max-width:640px; margin-left:auto; margin-right:auto;
+}
+
+@media (max-width:1240px){
+  .vital-readout-grid{ grid-template-columns:1fr 1fr; }
+  .validation-panel{ grid-template-columns:1fr 1fr; }
+}

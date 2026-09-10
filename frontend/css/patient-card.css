@@ -1,0 +1,108 @@
+/* ===================== Patient card (nakes dashboard) ===================== */
+.patient-photo{
+  width:64px; height:64px; border-radius:50%; overflow:hidden; margin-bottom:14px;
+  border:3px solid var(--blue-100);
+}
+.patient-photo img{ width:100%; height:100%; object-fit:cover; }
+.patient-info h3{ font-family:var(--font-head); font-size:18px; font-weight:800; margin-bottom:3px; }
+.patient-info p{ font-size:12.5px; color:var(--ink-600); margin-bottom:14px; }
+.status-badge{
+  display:inline-flex; align-items:center; gap:7px; font-size:12.5px; font-weight:700;
+  padding:6px 13px; border-radius:20px; margin-bottom:22px;
+}
+.status-badge.ok{ background:var(--green-100); color:var(--green); }
+.status-badge.watch{ background:var(--amber-100); color:var(--amber); }
+.status-badge.neutral{ background:var(--bg); color:var(--ink-600); }
+.status-badge .dot16{ width:15px; height:15px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; }
+.status-badge.ok .dot16{ background:var(--green); }
+.status-badge.watch .dot16{ background:var(--amber); }
+.status-badge.neutral .dot16{ background:var(--ink-400); }
+.vitals-row{ display:flex; justify-content:space-between; border-top:1px solid var(--line); padding-top:16px; }
+.vitals-row .label{ font-size:10.5px; letter-spacing:.4px; color:var(--ink-400); margin-bottom:6px; }
+.vitals-row .value{ font-size:15.5px; font-weight:700; }
+.vitals-row .value span{ font-weight:400; font-size:12.5px; color:var(--ink-600); }
+
+/* Overview */
+.overview-body{ display:grid; grid-template-columns:1fr 1fr 1.5fr; gap:14px; }
+.stat-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; grid-column:span 2; }
+.stat-box{ border:1px solid var(--line); border-radius:14px; padding:13px; display:flex; align-items:center; gap:11px; }
+.stat-icon{ width:40px; height:40px; border-radius:11px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.stat-icon svg{ width:19px; height:19px; }
+.stat-icon.pink{ background:var(--red-100); color:var(--red); }
+.stat-icon.blue{ background:var(--blue-100); color:var(--blue-600); }
+.stat-icon.teal{ background:var(--teal-100); color:var(--teal); }
+.stat-icon.purple{ background:var(--purple-100); color:var(--purple); }
+.stat-icon.amber{ background:var(--amber-100); color:var(--amber); }
+.stat-num{ font-size:17px; font-weight:800; font-family:var(--font-head); }
+.stat-num span{ font-size:11.5px; font-weight:500; color:var(--ink-600); font-family:var(--font-ui); }
+.stat-label{ font-size:10.5px; font-weight:700; letter-spacing:.3px; margin-top:2px; color:var(--ink-600); }
+
+.chart-box{ border:1px solid var(--line); border-radius:14px; padding:14px 16px 8px; display:flex; flex-direction:column; }
+.chart-box svg{ width:100%; height:132px; }
+.chart-labels{ display:flex; justify-content:space-between; font-size:10.5px; color:var(--ink-400); padding:0 2px; }
+.chart-title{ text-align:center; font-size:12.5px; font-weight:700; color:var(--ink-600); margin-top:8px; }
+.chart-empty{ font-size:11.5px; color:var(--ink-400); text-align:center; padding:30px 0; }
+
+/* Timeline / stepper */
+.step-item{ display:flex; gap:14px; align-items:flex-start; margin-bottom:18px; position:relative; }
+.step-item:not(:last-child)::before{
+  content:""; position:absolute; left:19px; top:40px; width:2px; height:calc(100% - 12px); background:var(--line);
+}
+.step-item:last-child{ margin-bottom:0; }
+.step-icon{ width:40px; height:40px; border-radius:11px; display:flex; align-items:center; justify-content:center; flex-shrink:0; z-index:1; background:#fff; border:1px solid var(--line); }
+.step-icon svg{ width:17px; height:17px; }
+.step-icon.done{ background:var(--green); border-color:var(--green); color:#fff; }
+.step-icon.now{ background:var(--blue-600); border-color:var(--blue-600); color:#fff; }
+.step-icon.todo{ color:var(--ink-400); }
+.step-item h4{ font-size:14px; font-weight:700; margin-bottom:3px; }
+.step-item p{ font-size:12.5px; color:var(--ink-400); }
+.step-cta{ margin-top:16px; }
+
+/* Diagnosis */
+.diag-sub{ font-size:12.5px; color:var(--ink-600); margin:-10px 0 16px; }
+.diagnosis-body{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; align-items:center; }
+.diag-col{ display:flex; flex-direction:column; gap:14px; }
+.diag-item{ border:1px solid var(--line); border-radius:14px; padding:13px; display:flex; align-items:center; gap:12px; }
+.diag-icon{ width:36px; height:36px; border-radius:10px; background:var(--blue-100); color:var(--blue-600); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.diag-icon svg{ width:16px; height:16px; }
+.diag-info{ flex:1; min-width:0; }
+.diag-info h4{ font-size:13px; font-weight:700; margin-bottom:7px; }
+.diag-dates{ display:flex; gap:12px; font-size:10px; color:var(--ink-400); }
+.diag-dates b{ display:block; font-size:11px; color:var(--ink-600); font-weight:600; }
+.progress-ring{ position:relative; width:44px; height:44px; flex-shrink:0; }
+.progress-ring svg{ transform:rotate(-90deg); width:44px; height:44px; }
+.progress-ring span{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:10.5px; font-weight:800; }
+.view-btn{ display:block; text-align:center; margin-top:8px; font-size:10.5px; font-weight:700; color:var(--blue-600); border:1px solid var(--blue-600); border-radius:14px; padding:3px 0; cursor:pointer; }
+.diag-empty{ font-size:12.5px; color:var(--ink-400); border:1px dashed var(--line); border-radius:14px; padding:16px; text-align:center; }
+
+.lung-figure{ display:flex; flex-direction:column; align-items:center; justify-content:center; }
+.lung-figure svg{ width:150px; }
+.lung-figure .caption{ font-size:12px; font-weight:700; color:var(--ink-600); margin-top:10px; }
+
+.organ-list{ display:flex; flex-direction:column; gap:12px; }
+.organ-item{ display:flex; align-items:center; gap:12px; border:1px solid var(--line); border-radius:14px; padding:11px 14px; }
+.organ-icon{ width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; color:#fff; flex-shrink:0; }
+.organ-icon svg{ width:16px; height:16px; }
+.organ-item h4{ font-size:13px; font-weight:700; flex:1; }
+.organ-pct{ font-size:13.5px; font-weight:800; }
+
+/* Message */
+.message-card{ display:flex; flex-direction:column; height:100%; }
+.msg-header{ display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+.msg-header .icons{ display:flex; gap:14px; color:var(--ink-600); }
+.msg-header .icons svg{ width:17px; height:17px; }
+.msg-date{ text-align:center; font-size:11.5px; color:var(--ink-400); margin-bottom:14px; }
+.msg-bubble-row{ display:flex; gap:10px; margin-bottom:16px; }
+.msg-avatar{ width:34px; height:34px; border-radius:50%; overflow:hidden; flex-shrink:0; }
+.msg-avatar img{ width:100%; height:100%; object-fit:cover; }
+.msg-bubble{ background:var(--bg); border-radius:14px 14px 14px 4px; padding:12px 14px; font-size:12.5px; color:var(--ink-600); line-height:1.55; max-width:280px; }
+.msg-input-row{ margin-top:auto; display:flex; align-items:center; gap:10px; background:var(--bg); border-radius:24px; padding:7px 7px 7px 18px; }
+.msg-input-row input{ flex:1; border:none; background:transparent; outline:none; font-size:13px; }
+.msg-input-row .mic, .msg-input-row .send{ width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.msg-input-row .mic{ color:var(--ink-600); }
+.msg-input-row .send{ background:var(--blue-600); color:#fff; }
+.msg-input-row .send svg, .msg-input-row .mic svg{ width:16px; height:16px; }
+
+@media (max-width:1240px){
+  .diagnosis-body{ grid-template-columns:1fr; }
+}

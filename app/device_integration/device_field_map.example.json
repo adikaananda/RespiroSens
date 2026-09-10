@@ -1,0 +1,41 @@
+{
+  "_comment": "Maps the REAL RespiroSens device payload field names to the canonical channel names the ML pipeline expects. Edit the 'path' values below once you know your firmware's actual JSON field names — nothing in the Python code needs to change. 'path' supports dot notation for nested JSON (e.g. 'sensors.bme688.voc_index').",
+
+  "duration_sec_path": "duration_sec",
+
+  "breath_channels": {
+    "voc_index_bme688":        { "path": "breath.bme688_voc_index",      "scale": 1.0, "offset": 0.0 },
+    "gas_resistance_bme688_ohm": { "path": "breath.bme688_gas_resistance", "scale": 1.0, "offset": 0.0 },
+    "voc_index_sgp41":         { "path": "breath.sgp41_voc_index",       "scale": 1.0, "offset": 0.0 },
+    "nox_index_sgp41":         { "path": "breath.sgp41_nox_index",       "scale": 1.0, "offset": 0.0 },
+    "co2_ppm_scd40":           { "path": "breath.scd40_co2_ppm",         "scale": 1.0, "offset": 0.0 },
+    "temperature_c_sht40":     { "path": "breath.sht40_temperature_c",   "scale": 1.0, "offset": 0.0 },
+    "humidity_pct_sht40":      { "path": "breath.sht40_humidity_pct",    "scale": 1.0, "offset": 0.0 },
+    "ammonia_ppm":             { "path": "breath.nh3_ppm",               "scale": 1.0, "offset": 0.0 },
+    "o_cymene_rel":            { "path": "breath.voc_panel.o_cymene",    "scale": 1.0, "offset": 0.0 },
+    "methyloctane_rel":        { "path": "breath.voc_panel.methyloctane", "scale": 1.0, "offset": 0.0 }
+  },
+
+  "baseline_channels": {
+    "voc_index_bme688":        { "path": "baseline.bme688_voc_index" },
+    "gas_resistance_bme688_ohm": { "path": "baseline.bme688_gas_resistance" },
+    "voc_index_sgp41":         { "path": "baseline.sgp41_voc_index" },
+    "nox_index_sgp41":         { "path": "baseline.sgp41_nox_index" },
+    "co2_ppm_scd40":           { "path": "baseline.scd40_co2_ppm" },
+    "temperature_c_sht40":     { "path": "baseline.sht40_temperature_c" },
+    "humidity_pct_sht40":      { "path": "baseline.sht40_humidity_pct" },
+    "ammonia_ppm":             { "path": "baseline.nh3_ppm" },
+    "o_cymene_rel":            { "path": "baseline.voc_panel.o_cymene" },
+    "methyloctane_rel":        { "path": "baseline.voc_panel.methyloctane" }
+  },
+
+  "_vitals_comment": "OPTIONAL. Only fill these in if a vitals module (pulse oximeter / thermometer / spirometer) is physically attached to the rig and its readings are included in the same upload. Delete a line (or leave the path pointing at nothing) for any reading your hardware does not provide — the nakes app will simply ask for that one field manually instead of guessing it. The core BME688/SGP41/SHT40/SCD40 + ammonia array measures breath VOC composition, not heart rate/SpO2/spirometry, so this section is empty by default.",
+  "vitals": {
+    "heart_rate_bpm":     { "path": "vitals.heart_rate_bpm" },
+    "spo2_pct":            { "path": "vitals.spo2_pct" },
+    "body_temp_c":          { "path": "vitals.body_temp_c" },
+    "resp_rate_per_min":    { "path": "vitals.resp_rate_per_min" },
+    "fvc_pct":              { "path": "vitals.fvc_pct" },
+    "fev1_pct":             { "path": "vitals.fev1_pct" }
+  }
+}

@@ -1,0 +1,6 @@
+/* ===================== Modal overlay ===================== */
+.modal-bg{
+  position:fixed; inset:0; background:rgba(16,22,39,0.45);
+  display:flex; align-items:center; justify-content:center; z-index:50;
+}
+.modal-card{ width:100%; max-width:420px; }
