@@ -15,7 +15,6 @@ def create_app(env: str = None):
     app = Flask(__name__, static_folder=None)
     app.config.from_object(CONFIG_MAP.get(env, CONFIG_MAP["development"]))
 
-<<<<<<< HEAD
     # Folder bisa read-only di serverless (Vercel) -> jangan sampai app gagal start.
     instance_dir = os.path.join(os.path.dirname(app.instance_path), "instance")
     for d in (app.config["MODEL_DIR"], app.config["OUTPUT_DIR"], instance_dir):
@@ -23,12 +22,6 @@ def create_app(env: str = None):
             os.makedirs(d, exist_ok=True)
         except OSError as exc:  # pragma: no cover - tergantung lingkungan
             app.logger.warning("Tidak bisa membuat folder %s: %s", d, exc)
-=======
-    os.makedirs(os.path.join(app.config["MODEL_DIR"]), exist_ok=True)
-    os.makedirs(app.config["OUTPUT_DIR"], exist_ok=True)
-    instance_dir = os.path.join(os.path.dirname(app.instance_path), "instance")
-    os.makedirs(instance_dir, exist_ok=True)
->>>>>>> 7c8f94f08c39755d85d4ff7654fcd79d2d4a503e
 
     db.init_app(app)
     CORS(app, resources={r"/api/*": {"origins": app.config["CORS_ORIGINS"]}})

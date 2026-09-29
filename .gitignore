@@ -4,11 +4,6 @@ __pycache__/
 .pytest_cache/
 instance/
 .env
-<<<<<<< HEAD
 .vercel/
 .env
-=======
-app/ml/model_store/*.json
-!app/ml/model_store/.gitkeep
->>>>>>> 7c8f94f08c39755d85d4ff7654fcd79d2d4a503e
 .env

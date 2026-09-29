@@ -12,7 +12,6 @@ import os
 import threading
 
 import numpy as np
-<<<<<<< HEAD
 
 from app.ml.features import FEATURE_NAMES
 # xgboost di-import di dalam load_model() (lazy) supaya aplikasi tetap bisa start
@@ -21,15 +20,6 @@ from app.ml.features import FEATURE_NAMES
 
 _lock = threading.Lock()
 _state = {"model": None, "explainer": None, "metadata": None}  # "explainer" dipertahankan utk kompatibilitas
-=======
-import shap
-from xgboost import XGBClassifier
-
-from app.ml.features import FEATURE_NAMES
-
-_lock = threading.Lock()
-_state = {"model": None, "explainer": None, "metadata": None}
->>>>>>> 7c8f94f08c39755d85d4ff7654fcd79d2d4a503e
 
 
 class ModelNotTrainedError(RuntimeError):
@@ -57,23 +47,15 @@ def load_model(app_config):
                 "then `python -m app.ml.train` (see README_INSTALL.md)."
             )
 
-<<<<<<< HEAD
         import xgboost as xgb
 
         model = xgb.Booster()
-=======
-        model = XGBClassifier()
->>>>>>> 7c8f94f08c39755d85d4ff7654fcd79d2d4a503e
         model.load_model(model_path)
 
         with open(metadata_path) as f:
             metadata = json.load(f)
 
-<<<<<<< HEAD
         explainer = None  # SHAP dihitung lewat model.predict(..., pred_contribs=True)
-=======
-        explainer = shap.TreeExplainer(model)
->>>>>>> 7c8f94f08c39755d85d4ff7654fcd79d2d4a503e
 
         _state.update(model=model, explainer=explainer, metadata=metadata)
         return model, explainer, metadata
@@ -107,7 +89,6 @@ def predict(features: dict, app_config) -> dict:
     vector = [float(features.get(name, 0.0)) for name in FEATURE_NAMES]
     norm_vector = _normalize(vector, metadata)
 
-<<<<<<< HEAD
     import xgboost as xgb
 
     dmat = xgb.DMatrix(norm_vector.reshape(1, -1), feature_names=None)
@@ -121,16 +102,6 @@ def predict(features: dict, app_config) -> dict:
 
     # TreeSHAP (log-odds), kolom terakhir = bias -> dibuang.
     shap_row = np.array(model.predict(dmat, pred_contribs=True, iteration_range=it_range)).reshape(-1)[: len(FEATURE_NAMES)]
-=======
-    proba = float(model.predict_proba(norm_vector.reshape(1, -1))[0, 1])
-    score = round(proba * 100, 1)
-    category = _score_to_category(score)
-
-    shap_values = explainer.shap_values(norm_vector.reshape(1, -1))
-    if isinstance(shap_values, list):  # older shap API returns a list per class
-        shap_values = shap_values[-1]
-    shap_row = np.array(shap_values).reshape(-1)
->>>>>>> 7c8f94f08c39755d85d4ff7654fcd79d2d4a503e
 
     contributions = {
         name: round(float(val), 4) for name, val in zip(FEATURE_NAMES, shap_row)

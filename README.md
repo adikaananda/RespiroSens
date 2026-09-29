@@ -92,7 +92,6 @@ Frontend: HTML / CSS / JavaScript
 Important
 
 The current ML model is trained on synthetic data and is not clinically validated. It is intended for prototype, testing, and demonstration purposes only.
-<<<<<<< HEAD
 
 ## Integrasi alat RespiroSens via Firebase (DEVICE_MODE=firebase)
 
@@ -106,5 +105,3 @@ tombol ditekan -> QC -> `POST .../predict` menjalankan **QC deterministik + AI r
 - `python export_firebase_dataset.py` -> `data/firebase_features.csv` untuk melatih ulang model dari data alat.
 - Skor 0-100 pada hasil alat hanyalah pita ordinal (15/45/80), bukan probabilitas; UI menampilkan kategori.
 - Tanpa API key AI (`GEMINI_API_KEY`, atau `ANTHROPIC_API_KEY` bila `AI_PROVIDER=anthropic`), `/predict` mengembalikan 503 `ai_unavailable` (sengaja: tidak ada hasil tanpa validator #2).
-=======
->>>>>>> 7c8f94f08c39755d85d4ff7654fcd79d2d4a503e

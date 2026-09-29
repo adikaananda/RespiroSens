@@ -1,0 +1,53 @@
+{
+  "model_version": "demo-v0.1",
+  "trained_on_demo_data": true,
+  "dataset_path": "data\\demo\\synthetic_voc_dataset.csv",
+  "feature_names": [
+    "diff_voc_index_bme688",
+    "diff_gas_resistance_drop_pct",
+    "diff_voc_index_sgp41",
+    "diff_nox_index_sgp41",
+    "diff_ammonia_ppm",
+    "diff_o_cymene_rel",
+    "diff_methyloctane_rel",
+    "breath_co2_ppm",
+    "breath_temperature_c",
+    "breath_humidity_pct"
+  ],
+  "normalization": {
+    "mean": [
+      36.477507780379064,
+      24.82524105465694,
+      33.29842212481158,
+      2.2460473119093765,
+      0.26504358746147877,
+      0.08630865836176631,
+      0.07764581959622135,
+      4529.569038318673,
+      33.46215631696197,
+      91.43313867205285
+    ],
+    "std": [
+      16.337325380606238,
+      8.616668374011585,
+      14.367769260677337,
+      1.4961423884564262,
+      0.1369274095026474,
+      0.04342101441569875,
+      0.03761245247996298,
+      573.7550175210342,
+      0.8408645800645921,
+      3.781498531892988
+    ]
+  },
+  "metrics": {
+    "accuracy": 0.7958,
+    "precision": 0.7593,
+    "recall_sensitivity": 0.8662,
+    "f1": 0.8092,
+    "roc_auc": 0.906,
+    "n_train": 850,
+    "n_test": 284
+  },
+  "metrics_disclaimer": "Metrics above were computed on SYNTHETIC/DEMO data and describe model fit to that synthetic data only. They are NOT clinical accuracy, sensitivity, specificity, or AUC and must not be cited as research results. Real performance can only be established through the clinical validation described in the proposal (ethics clearance + UPTD Puskesmas Kuta Selatan)."
+}

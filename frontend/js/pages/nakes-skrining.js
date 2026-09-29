@@ -237,17 +237,11 @@ async function initDeviceModeBadge(){
   const label = document.getElementById('deviceModeLabel');
   try {
     const health = await apiFetch('/health');
-<<<<<<< HEAD
     const isSim = health.device_mode === 'simulation';
     dot.className = 'device-dot ' + (isSim ? 'sim' : 'live');
     label.textContent = isSim ? 'Simulation Mode (data demo)'
       : health.device_mode === 'firebase' ? 'Alat RespiroSens Terhubung (via Firebase)'
       : 'Perangkat RespiroSens Terhubung';
-=======
-    const isSim = health.device_mode !== 'http';
-    dot.className = 'device-dot ' + (isSim ? 'sim' : 'live');
-    label.textContent = isSim ? 'Simulation Mode (data demo)' : 'Perangkat RespiroSens Terhubung';
->>>>>>> 7c8f94f08c39755d85d4ff7654fcd79d2d4a503e
   } catch (e) {
     dot.className = 'device-dot';
     label.textContent = 'Status perangkat tidak diketahui';
@@ -430,7 +424,6 @@ const RISK_RECOMMENDATION = {
   merah: 'Probabilitas risiko tinggi. Rekomendasi: rujukan segera untuk pemeriksaan konfirmasi (TCM/Xpert MTB-RIF) — jangan tunda tindak lanjut klinis.',
 };
 
-<<<<<<< HEAD
 const DEVICE_MODEL_PREFIX = 'device-qc+ai';
 const AI_LEVEL_LABEL = {rendah:'Rendah', sedang:'Sedang', tinggi:'Tinggi', tidak_dapat_ditentukan:'Belum pasti'};
 const DECISION_LABEL = {
@@ -495,14 +488,6 @@ function renderResult(session){
   document.getElementById('resultTimestamp').textContent = 'Dianalisis ' + formatDateId(session.updated_at) + ' · Model ' + prediction.model_version;
   document.getElementById('resultModelBadge').textContent = isDeviceResult ? 'QC + AI Reviewer (data alat)'
     : prediction.trained_on_demo_data ? 'XGBoost + SHAP (Demo)' : 'XGBoost + SHAP';
-=======
-function renderResult(session){
-  const prediction = session.prediction;
-  const score = prediction.risk_score;
-  document.getElementById('riskScoreNum').textContent = Math.round(score);
-  document.getElementById('resultTimestamp').textContent = 'Dianalisis ' + formatDateId(session.updated_at) + ' · Model ' + prediction.model_version;
-  document.getElementById('resultModelBadge').textContent = prediction.trained_on_demo_data ? 'XGBoost + SHAP (Demo)' : 'XGBoost + SHAP';
->>>>>>> 7c8f94f08c39755d85d4ff7654fcd79d2d4a503e
 
   const circumference = 402;
   const offset = circumference * (1 - score / 100);
@@ -532,7 +517,6 @@ function renderResult(session){
   document.getElementById('valDuration').textContent = duration != null ? `${(duration.toFixed ? duration.toFixed(1) : duration)} detik` : '—';
   document.getElementById('valModelVersion').textContent = prediction.model_version || '—';
 
-<<<<<<< HEAD
   if (isDeviceResult) {
     renderDeviceAnalysis(prediction);
   } else {
@@ -553,34 +537,13 @@ function renderResult(session){
     }).join('');
 
   }
-=======
-  // SHAP bar chart — top 5 contributing VOC features, signed and scaled.
-  const entries = Object.entries(prediction.shap_values || {})
-    .sort((a, b) => Math.abs(b[1]) - Math.abs(a[1]))
-    .slice(0, 5);
-  const maxAbs = Math.max(...entries.map(([, v]) => Math.abs(v)), 0.0001);
-  document.getElementById('shapBars').innerHTML = entries.map(([name, val]) => {
-    const pct = Math.max(6, Math.round(Math.abs(val) / maxAbs * 100));
-    const color = val > 0 ? 'var(--red)' : 'var(--blue-600)';
-    const label = VOC_FEATURE_LABELS[name] || name;
-    return `<div class="shap-bar-row">
-      <div class="sb-label">${label}</div>
-      <div class="shap-bar-track"><div class="shap-bar-fill" style="width:${pct}%;background:${color};"></div></div>
-      <div class="sb-value">${val > 0 ? '+' : ''}${val.toFixed(3)}</div>
-    </div>`;
-  }).join('');
->>>>>>> 7c8f94f08c39755d85d4ff7654fcd79d2d4a503e
 
   document.getElementById('clinicalNoteBox').innerHTML =
     `Hasil ini adalah skor <b>skrining/triase AI</b> (${session.is_simulated ? 'Simulation Mode — data demo, bukan pasien nyata' : 'dari pembacaan perangkat RespiroSens'}), ` +
     `<b>bukan diagnosis medis</b>. Skor rendah tidak menyingkirkan diagnosis pada presentasi klinis kuat. ` +
     `Setiap skor wajib ditinjau tenaga kesehatan bersama konteks klinis pasien dan ditindaklanjuti dengan pemeriksaan konfirmasi baku (mis. TCM/Xpert MTB-RIF) sebelum keputusan klinis diambil.` +
-<<<<<<< HEAD
     (isDeviceResult ? ' <i>Analisis data alat ini masih tahap riset awal: biomarker napas TBC belum tervalidasi klinis dan sinyal dipengaruhi kelembapan serta sisa napas di chamber. Kategori adalah rekomendasi triase, bukan hasil model terlatih.</i>'
       : prediction.trained_on_demo_data ? ' <i>Model saat ini dilatih pada data DEMO/SIMULASI — belum tervalidasi klinis.</i>' : '');
-=======
-    (prediction.trained_on_demo_data ? ' <i>Model saat ini dilatih pada data DEMO/SIMULASI — belum tervalidasi klinis.</i>' : '');
->>>>>>> 7c8f94f08c39755d85d4ff7654fcd79d2d4a503e
 
   const saveBtn = document.getElementById('saveReferralBtn');
   saveBtn.disabled = false;
