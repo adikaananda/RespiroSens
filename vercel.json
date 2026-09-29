@@ -1,17 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "builds": [
-    {
-      "src": "run.py",
-      "use": "@vercel/python"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "run.py"
-    }
-  ],
   "functions": {
     "run.py": {
       "excludeFiles": "{tests/**,data/**,instance/**,frontend/legacy/**,**/test_*.py,TESTING.md,export_firebase_dataset.py,init_db.py}"
