@@ -1,0 +1,53 @@
+        <div class="page-head" style="margin-bottom:22px;">
+          <div><h1>Dashboard Dinas Kesehatan</h1><p>Pantauan skrining pernapasan tingkat wilayah, real-time.</p></div>
+          <div class="btn-ghost">Kabupaten Badung <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#ic-chevron"/></svg></div>
+        </div>
+
+        <div class="banner">
+          <img src="https://picsum.photos/seed/respiro-dinkes/1200/400" alt="Tenaga kesehatan">
+          <div class="banner-text">
+            <h2>Program Skrining Pernapasan Wilayah Badung</h2>
+            <p>142 Puskesmas &amp; Klinik telah terhubung dengan RespiroSens untuk pelaporan dini kasus gangguan pernapasan.</p>
+          </div>
+        </div>
+
+        <div class="stat-cards" id="dinkesStatCards">
+          <div class="stat-card">
+            <div class="top"><div class="icon" style="background:var(--blue-100);color:var(--blue-600)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#ic-clip"/></svg></div></div>
+            <div class="num" id="dinkesTotalSkrining">–</div><div class="lbl">Total Skrining</div>
+          </div>
+          <div class="stat-card">
+            <div class="top"><div class="icon" style="background:var(--red-100);color:var(--red)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#ic-alert"/></svg></div></div>
+            <div class="num" id="dinkesHighRisk">–</div><div class="lbl">Kasus Risiko Tinggi (Merah)</div>
+          </div>
+          <div class="stat-card">
+            <div class="top"><div class="icon" style="background:var(--teal-100);color:var(--teal)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#ic-building"/></svg></div></div>
+            <div class="num" id="dinkesFaskesAktif">–</div><div class="lbl">Faskes Aktif</div>
+          </div>
+          <div class="stat-card">
+            <div class="top"><div class="icon" style="background:var(--purple-100);color:var(--purple)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#ic-users"/></svg></div></div>
+            <div class="num" id="dinkesReferralRate">–</div><div class="lbl">Tingkat Kepatuhan Rujukan</div>
+          </div>
+        </div>
+
+        <div class="grid-row row-2">
+          <div class="card">
+            <div class="card-header"><h2>Peta Sebaran Risiko</h2><div class="pill">Live</div></div>
+            <div class="map-box" style="padding:0;overflow:hidden;">
+              <div id="dinkesLeafletMap" style="width:100%;height:280px;border-radius:12px;"></div>
+              <div class="map-legend">
+                <div><span style="background:#EA5A6B"></span>Risiko Tinggi (Merah)</div>
+                <div><span style="background:#F0A93A"></span>Sedang (Kuning)</div>
+                <div><span style="background:#26B978"></span>Rendah (Hijau)</div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><h2>Kinerja Faskes — Heatmap 3 Lapis</h2><div class="pill">L1/L2/L3</div></div>
+            <div id="faskesPerformanceList">
+              <p style="font-size:13px;color:var(--ink-600);">Memuat data...</p>
+            </div>
+          </div>
+        </div>
+
+      

@@ -1,0 +1,50 @@
+  <div class="login-visual">
+    <div class="brand-mark">
+      <img style="width: 300px;" src="assets/images/logo.png" alt="">
+      <div>
+       
+      </div>
+    </div>
+
+    <div class="login-hero">
+      <h1>Deteksi dini gangguan pernapasan, lebih cepat dan terukur.</h1>
+      <p>Platform terintegrasi untuk Tenaga Kesehatan, Dinas Kesehatan, dan Admin dalam memantau skrining pernapasan masyarakat secara real-time.</p>
+
+      <svg class="hero-illustration" viewBox="0 0 460 260" fill="none" style="overflow: visible;">
+  <ellipse cx="230" cy="235" rx="170" ry="14" fill="rgba(0,0,0,0.18)"/>
+  <image href="assets/images/mascot.png" x="30" y="-60" width="380" height="380" />
+</svg>
+    </div>
+
+    <div class="login-stats">
+      <div><b>128rb+</b><span>Skrining dilakukan</span></div>
+      <div><b>340</b><span>Faskes terhubung</span></div>
+      <div><b>97%</b><span>Akurasi triase</span></div>
+    </div>
+  </div>
+
+  <div class="login-form-side">
+    <div class="login-box">
+      <h2>Masuk ke Akun</h2>
+      <p class="lead">Pilih peran Anda untuk melanjutkan ke dashboard RespiroSens.</p>
+
+      <div class="role-tabs" id="roleTabs">
+        <div class="role-tab active" data-role="nakes">Nakes</div>
+        <div class="role-tab" data-role="dinkes">Dinkes</div>
+        <div class="role-tab" data-role="admin">Admin</div>
+      </div>
+
+      <div class="field">
+        <label>Email / NIK Petugas</label>
+        <input type="text" id="loginEmail" placeholder="nama@instansi.go.id" value="nakes.demo@respirosens.id">
+      </div>
+      <div class="field">
+        <label>Kata Sandi</label>
+        <input type="password" id="loginPassword" placeholder="••••••••" value="nakes123">
+      </div>
+      <p class="demo-note" id="loginError" style="display:none;color:#e05252;"></p>
+
+      <button class="login-submit" onclick="doLogin()">Masuk sebagai <span id="roleLabelBtn">Nakes</span></button>
+      <p class="login-foot">Belum punya akun? <a href="#">Hubungi Admin Dinas Kesehatan</a></p>
+  </div>
+</div>

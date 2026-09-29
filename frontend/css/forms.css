@@ -1,0 +1,9 @@
+/* ===================== FORM FIELDS (shared) ===================== */
+.field{ margin-bottom:16px; }
+.field label{ display:block; font-size:12.5px; font-weight:600; color:var(--ink-600); margin-bottom:7px; }
+.field input, .field select{
+  width:100%; padding:12px 14px; border-radius:11px; border:1px solid var(--line);
+  font-size:14px; background:#F8FAFD; outline:none; color:var(--ink-900);
+}
+.field input:focus, .field select:focus{ border-color:var(--blue-500); background:#fff; }
+.field-hint{ font-size:11px; color:var(--ink-400); margin-top:5px; }

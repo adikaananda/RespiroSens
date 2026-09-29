@@ -1,0 +1,57 @@
+/* ===================== Info box ===================== */
+.info-box{
+  background:linear-gradient(165deg,var(--blue-100),#EAF6F8); border-radius:18px; padding:30px 20px;
+  display:flex; flex-direction:column; align-items:center; text-align:center; gap:12px;
+}
+.info-box svg{ width:58px; height:58px; }
+.info-box h3{ font-family:var(--font-head); font-size:15.5px; font-weight:800; }
+.info-box p{ font-size:12.5px; color:var(--ink-600); line-height:1.55; max-width:220px; }
+
+/* Banner with photo */
+.banner{
+  border-radius:var(--radius-lg); overflow:hidden; position:relative; min-height:150px;
+  display:flex; align-items:center; background:linear-gradient(120deg,var(--blue-900),var(--blue-600));
+}
+.banner img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.28; }
+.banner-text{ position:relative; z-index:1; color:#fff; padding:28px 32px; max-width:60%; }
+.banner-text h2{ font-family:var(--font-head); font-size:20px; font-weight:800; margin-bottom:6px; }
+.banner-text p{ font-size:13px; color:rgba(255,255,255,0.82); line-height:1.5; }
+
+/* Stat cards row (dinkes/admin) */
+.stat-cards{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+.stat-card{ background:#fff; border:1px solid var(--line); border-radius:18px; padding:20px; box-shadow:var(--shadow-sm); }
+.stat-card .top{ display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+.stat-card .icon{ width:42px; height:42px; border-radius:12px; display:flex; align-items:center; justify-content:center; }
+.stat-card .icon svg{ width:19px; height:19px; }
+.stat-card .num{ font-family:var(--font-head); font-size:25px; font-weight:800; }
+.stat-card .lbl{ font-size:12.5px; color:var(--ink-600); margin-top:3px; }
+.trend{ font-size:11.5px; font-weight:700; padding:4px 9px; border-radius:20px; }
+.trend.up{ color:var(--green); background:var(--green-100); }
+.trend.down{ color:var(--red); background:var(--red-100); }
+
+/* Faskes list */
+.faskes-item{ display:flex; align-items:center; gap:14px; padding:14px 4px; border-bottom:1px solid var(--line); }
+.faskes-item:last-child{ border-bottom:none; }
+.faskes-item .fi-icon{ width:44px; height:44px; border-radius:12px; background:var(--blue-100); color:var(--blue-600); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.faskes-item .fi-icon svg{ width:20px; height:20px; }
+.faskes-item .fi-info{ flex:1; min-width:0; }
+.faskes-item .fi-info h4{ font-size:14px; font-weight:700; }
+.faskes-item .fi-info p{ font-size:12px; color:var(--ink-400); }
+.bar-wrap{ width:130px; }
+.bar-track{ height:7px; background:var(--line); border-radius:6px; overflow:hidden; }
+.bar-fill{ height:100%; background:var(--blue-600); border-radius:6px; }
+.bar-cap{ display:flex; justify-content:space-between; font-size:10.5px; color:var(--ink-400); margin-top:5px; }
+
+/* Map */
+.map-box{
+  border-radius:18px; height:280px; position:relative; overflow:hidden;
+  background:linear-gradient(160deg,#101C3B,#1651C7 65%, #3F7DFF);
+}
+.map-box svg{ position:absolute; inset:0; width:100%; height:100%; opacity:.5; }
+.map-legend{ position:absolute; bottom:16px; left:16px; display:flex; gap:14px; background:rgba(255,255,255,0.14); backdrop-filter:blur(6px); padding:10px 14px; border-radius:12px; z-index:400; }
+.map-legend div{ display:flex; align-items:center; gap:6px; font-size:11px; color:#fff; font-weight:600; }
+.map-legend span{ width:9px; height:9px; border-radius:50%; }
+
+@media (max-width:1240px){
+  .stat-cards{ grid-template-columns:1fr 1fr; }
+}

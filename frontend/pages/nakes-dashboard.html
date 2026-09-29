@@ -1,0 +1,170 @@
+        <div class="page-head" style="margin-bottom:22px;">
+          <div><h1>Data Pasien Skrining</h1><p>Ringkasan kondisi pasien &amp; aktivitas skrining hari ini.</p></div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div class="search-box" style="background:#fff;border:1px solid var(--line);width:230px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#ic-search"/></svg>
+              <input type="text" id="nakesPatientSearchInput" placeholder="Cari nama pasien" oninput="debouncedSearch('sessions')" style="border:none;outline:none;background:transparent;font:inherit;width:100%;">
+            </div>
+            <button class="btn-ghost" style="padding:11px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><use href="#ic-gear"/></svg></button>
+            <button class="btn-primary" onclick="goPage('nakes-skrining')">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4"><use href="#ic-plus"/></svg>
+              Skrining Baru
+            </button>
+          </div>
+        </div>
+
+        <div class="grid-row row-1">
+          <div class="card">
+            <div class="card-header"><h2>ID Pasien</h2><div class="pill" id="patientIdPill" style="background:var(--blue-100);color:var(--blue-700);font-weight:700;">—</div></div>
+            <div class="patient-photo"><img id="patientPhotoImg" src="" alt="Foto pasien"></div>
+            <div class="patient-info">
+              <h3 id="patientNameEl">Memuat...</h3>
+              <p id="patientSubEl">—</p>
+            </div>
+            <div class="status-badge neutral" id="patientStatusBadge"><span class="dot16" id="patientStatusDot">•</span> <span id="patientStatusText">Memuat data</span></div>
+            <div class="vitals-row">
+              <div><div class="label">TINGGI</div><div class="value" id="vitalHeightVal">—</div></div>
+              <div><div class="label">BERAT</div><div class="value" id="vitalWeightVal">—</div></div>
+              <div><div class="label">IMT</div><div class="value" id="vitalBmiVal">—</div></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><h2>Overview Vital &amp; Pernapasan</h2><div class="pill">Terbaru <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#ic-chevron"/></svg></div></div>
+            <div class="overview-body">
+              <div class="stat-grid">
+                <div class="stat-box">
+                  <div class="stat-icon pink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#ic-heart"/></svg></div>
+                  <div><div class="stat-num"><span id="vitalHeartRate">—</span> <span>bpm</span></div><div class="stat-label">DETAK JANTUNG</div></div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#ic-drop"/></svg></div>
+                  <div><div class="stat-num"><span id="vitalSpo2">—</span> <span>%</span></div><div class="stat-label">SPO2</div></div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-icon teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#ic-wind"/></svg></div>
+                  <div><div class="stat-num"><span id="vitalRespRate">—</span> <span>x/menit</span></div><div class="stat-label">FREKUENSI NAPAS</div></div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-icon purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#ic-therm"/></svg></div>
+                  <div><div class="stat-num"><span id="vitalTemp">—</span> <span>°C</span></div><div class="stat-label">SUHU TUBUH</div></div>
+                </div>
+              </div>
+              <div class="chart-box">
+                <svg id="vitalTrendSvg" viewBox="0 0 320 132" preserveAspectRatio="none">
+                  <polyline id="vitalTrendPolyline" fill="none" stroke="#2A6DF4" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" points="" />
+                </svg>
+                <div class="chart-empty hidden" id="vitalTrendEmpty">Belum cukup riwayat skrining untuk pasien ini.</div>
+                <div class="chart-labels" id="vitalTrendLabels"></div>
+                <div class="chart-title">Tren Frekuensi Napas (x/menit)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-row row-2">
+          <div class="card">
+            <div class="card-header"><h2>Alur Skrining Awal</h2><div class="pill">4 tahap</div></div>
+            <div class="step-item" id="stepItem1">
+              <div class="step-icon todo" id="stepIcon1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><use href="#ic-clip"/></svg></div>
+              <div><h4>Data Diri Pasien</h4><p id="stepDesc1">—</p></div>
+            </div>
+            <div class="step-item" id="stepItem2">
+              <div class="step-icon todo" id="stepIcon2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><use href="#ic-cough"/></svg></div>
+              <div><h4>Gejala Klinis</h4><p id="stepDesc2">—</p></div>
+            </div>
+            <div class="step-item" id="stepItem3">
+              <div class="step-icon todo" id="stepIcon3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><use href="#ic-heart"/></svg></div>
+              <div><h4>Pemeriksaan Vital</h4><p id="stepDesc3">—</p></div>
+            </div>
+            <div class="step-item" id="stepItem4">
+              <div class="step-icon todo" id="stepIcon4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><use href="#ic-shield"/></svg></div>
+              <div><h4>Hasil &amp; Rekomendasi</h4><p id="stepDesc4">Skor risiko belum tersedia</p></div>
+            </div>
+            <button class="btn-primary step-cta" onclick="goPage('nakes-skrining')" style="width:100%;justify-content:center;">Lanjutkan Skrining</button>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><h2>Diagnosis Paru</h2><div class="pill">Terbaru <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#ic-chevron"/></svg></div></div>
+            <div class="diag-sub" id="diagSub">—</div>
+            <div class="diagnosis-body">
+              <div class="diag-col" id="diagItemsContainer">
+                <div class="diag-empty">Memuat data gejala...</div>
+              </div>
+
+              <div class="lung-figure">
+                <svg viewBox="0 0 140 220" fill="none">
+                  <ellipse cx="70" cy="208" rx="44" ry="6" fill="#E9EDF5"/>
+                  <rect x="66" y="8" width="8" height="30" rx="4" fill="#D7DEEA"/>
+                  <path d="M66 14h8M66 20h8M66 26h8M66 32h8" stroke="#B9C3D6" stroke-width="1.4"/>
+                  <path d="M70 38c-6 0-11 4-13 9l-7 14" stroke="#B9C3D6" stroke-width="4" stroke-linecap="round"/>
+                  <path d="M70 38c6 0 11 4 13 9l7 14" stroke="#B9C3D6" stroke-width="4" stroke-linecap="round"/>
+                  <path d="M70 46c-10-16-28-22-42-16-20 8-27 34-20 60 6 24 20 46 33 55 10 7 20 0 20-13L70 46z" fill="#CDE2FF"/>
+                  <path d="M70 46c-10-16-28-22-42-16-20 8-27 34-20 60 6 24 20 46 33 55 10 7 20 0 20-13" fill="none" stroke="#8FBBFF" stroke-width="1.5"/>
+                  <path d="M70 46c10-16 28-22 42-16 20 8 27 34 20 60-6 24-20 46-33 55-10 7-20 0-20-13L70 46z" fill="#A8CBFF"/>
+                  <path d="M70 46c10-16 28-22 42-16 20 8 27 34 20 60-6 24-20 46-33 55-10 7-20 0-20-13" fill="none" stroke="#7FA9F0" stroke-width="1.5"/>
+                  <path d="M46 62c-6 8-9 20-7 33M94 62c6 8 9 20 7 33" stroke="#7FA9F0" stroke-width="1.3" opacity=".6"/>
+                  <circle id="lungDotKanan" cx="44" cy="86" r="5" fill="#8A93A6"/>
+                  <circle id="lungDotSaluran" cx="98" cy="98" r="5" fill="#8A93A6"/>
+                  <circle id="lungDotKiri" cx="56" cy="132" r="5" fill="#8A93A6"/>
+                  <circle id="lungDotFvc" cx="90" cy="140" r="4" fill="#8A93A6"/>
+                </svg>
+                <div class="caption">Model Paru Interaktif</div>
+              </div>
+
+              <div class="organ-list">
+                <div class="organ-item"><div class="organ-icon" style="background:#2A6DF4"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><use href="#ic-lung"/></svg></div><h4>Paru Kanan</h4><div class="organ-pct" id="organPctKanan" style="color:#2A6DF4">—</div></div>
+                <div class="organ-item"><div class="organ-icon" style="background:#0EA5A0"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><use href="#ic-lung"/></svg></div><h4>Paru Kiri</h4><div class="organ-pct" id="organPctKiri" style="color:#0EA5A0">—</div></div>
+                <div class="organ-item"><div class="organ-icon" style="background:#F0A93A"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><use href="#ic-wind"/></svg></div><h4>Saluran Napas</h4><div class="organ-pct" id="organPctSaluran" style="color:#F0A93A">—</div></div>
+                <div class="organ-item"><div class="organ-icon" style="background:#7A6FF0"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><use href="#ic-gear"/></svg></div><h4>Kapasitas Vital (FVC)</h4><div class="organ-pct" id="organPctFvc" style="color:#7A6FF0">—</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-row row-3">
+          <div class="card message-card">
+            <div class="msg-header"><h2>Pesan</h2><div class="icons">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><use href="#ic-video"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><use href="#ic-chat"/></svg>
+            </div></div>
+            <div class="msg-date" id="msgDateLabel">—</div>
+            <div class="msg-bubble-row">
+              <div class="msg-avatar"><img id="msgAvatarImg" src="" alt="Nakes"></div>
+              <div class="msg-bubble" id="msgBubbleText">Pilih pasien untuk melihat catatan klinis terbaru.</div>
+            </div>
+            <div class="msg-input-row">
+              <input type="text" placeholder="Tulis pesan...">
+              <div class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#ic-mic"/></svg></div>
+              <div class="send"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><use href="#ic-send"/></svg></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h2>Riwayat Skrining</h2>
+              <div style="display:flex;gap:10px;align-items:center;">
+                <span class="btn-ghost">+ Baru</span>
+              </div>
+            </div>
+            <table>
+              <thead><tr><th>No</th><th>Nama Pasien</th><th>Tanggal</th><th>Skor Risiko</th><th>Status</th></tr></thead>
+              <tbody id="riwayatSkriningBody">
+                <tr><td colspan="5" style="text-align:center;color:var(--ink-600);">Memuat data...</td></tr>
+              </tbody>
+            </table>
+            <div class="row-foot">
+              <div class="total-pill" id="riwayatTotalPill">Total 0</div>
+            </div>
+          </div>
+
+          <div class="card" style="display:flex;flex-direction:column;">
+            <h2 style="font-family:var(--font-head);font-size:16.5px;font-weight:700;margin-bottom:16px;">Rujukan</h2>
+            <div class="info-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#2A6DF4" stroke-width="1.6"><use href="#ic-shield"/></svg>
+              <h3>Butuh Rujukan Lanjutan?</h3>
+              <p>Jika skor risiko tinggi, rujuk pasien ke Puskesmas atau RS terdekat untuk pemeriksaan rontgen dan dahak.</p>
+              <button class="btn-primary" style="margin-top:6px;">Buat Rujukan</button>
+            </div>
+          </div>
+        </div>

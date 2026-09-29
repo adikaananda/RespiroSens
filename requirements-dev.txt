@@ -1,0 +1,10 @@
+# Untuk lokal / training / tes:  pip install -r requirements-dev.txt
+-r requirements.txt
+
+pandas==2.2.2
+scikit-learn==1.5.1
+pytest==8.3.2
+
+# OCR KTP (opsional; butuh binary tesseract di sistem)
+opencv-python-headless==4.10.0.84
+pytesseract==0.3.13
